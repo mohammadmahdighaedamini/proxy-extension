@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" class="boot">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proxy Switch</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Proxy Switch</h1>
+  </header>
+
+  <main>
+    <div id="powerWrap" class="switch-wrap" data-on="false">
+      <button id="power" class="switch" role="switch" aria-checked="false" aria-label="Proxy">
+        <span class="lbl lbl-on" aria-hidden="true">ON</span>
+        <span class="lbl lbl-off" aria-hidden="true">OFF</span>
+        <span class="knob" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <p id="status" class="status" data-state="off" role="status">
+      <i class="dot" aria-hidden="true"></i><span id="statusText">Direct connection</span>
+    </p>
+
+    <div id="seg" class="seg" role="radiogroup" aria-label="Protocol" data-scheme="http">
+      <i class="seg-pill" aria-hidden="true"></i>
+      <button type="button" role="radio" data-scheme="http" aria-checked="true">HTTP</button>
+      <button type="button" role="radio" data-scheme="socks5" aria-checked="false">SOCKS5</button>
+    </div>
+
+    <div class="fields">
+      <label class="field host">
+        <span id="hostLabel">HTTP Proxy</span>
+        <input id="host" type="text" inputmode="url" spellcheck="false" autocomplete="off" placeholder="127.0.0.1">
+      </label>
+      <label class="field port">
+        <span>Port</span>
+        <input id="port" type="text" inputmode="numeric" maxlength="5" spellcheck="false" autocomplete="off" placeholder="8085">
+      </label>
+    </div>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

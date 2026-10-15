@@ -1,0 +1,2 @@
+Proxy Switch - Firefox
+======================

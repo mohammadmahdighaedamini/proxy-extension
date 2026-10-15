@@ -1,0 +1,240 @@
+:root {
+  --bg: #f3f5f9;
+  --fg: #1a1f2e;
+  --muted: #697187;
+  --field: #ffffff;
+  --line: #d3d9e5;
+  --seg: #e4e8f0;
+  --on: #1fc94f;
+  --on-deep: #12a63a;
+  --off: #f5222d;
+  --off-deep: #d10f1b;
+  --focus: #3b7cff;
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "SF Pro Text", Roboto, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171e;
+    --fg: #eef1f7;
+    --muted: #8b93a8;
+    --field: #1c2029;
+    --line: #2d3342;
+    --seg: #1f2430;
+    --focus: #6a9bff;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html { background: var(--bg); }
+
+body {
+  width: 320px;
+  padding: 18px 20px 22px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.4 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Phones (Firefox for Android): popup is a full-width page. */
+.android body { width: auto; max-width: 440px; margin: 0 auto; padding: 24px 22px 32px; }
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+}
+h1 { font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 22px;
+}
+
+/* ---------- Power switch ---------- */
+/* One element, one background: the colour change is a sliding wipe, so there
+   is no stacked layer or dark inset shadow that could leave a rim at the edge. */
+.switch {
+  position: relative;
+  z-index: 1;
+  width: 128px;
+  height: 60px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  cursor: pointer;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(90deg, var(--on) 44%, var(--off) 56%);
+  background-size: 100% 100%, 300% 100%;
+  background-position: 0 0, 100% 0;
+  transition: background-position .38s cubic-bezier(.3, 1, .5, 1);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.switch[aria-checked="true"] { background-position: 0 0, 0 0; }
+
+.switch-wrap { position: relative; width: 128px; height: 60px; }
+.switch-wrap::before,
+.switch-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 12px 10px -8px;
+  border-radius: 999px;
+  filter: blur(14px);
+  opacity: .55;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.switch-wrap::before { background: var(--off); }
+.switch-wrap::after  { background: var(--on); opacity: 0; }
+.switch-wrap[data-on="true"]::before { opacity: 0; }
+.switch-wrap[data-on="true"]::after  { opacity: .6; }
+
+.switch:focus { outline: none; }
+.kbd .switch:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+.switch:active .knob { width: 54px; }
+.switch[aria-checked="true"]:active .knob { transform: translateX(62px); }
+
+.knob {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff, #eef0f4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .22);
+  transition: transform .38s cubic-bezier(.3, 1.35, .5, 1), width .15s ease;
+}
+.switch[aria-checked="true"] .knob { transform: translateX(68px); }
+
+.lbl {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  transition: opacity .25s ease;
+}
+.lbl-on  { left: 22px;  opacity: 0; }
+.lbl-off { right: 20px; opacity: 1; }
+.switch[aria-checked="true"] .lbl-on  { opacity: 1; }
+.switch[aria-checked="true"] .lbl-off { opacity: 0; }
+
+.switch.nope { animation: nope .35s; }
+@keyframes nope {
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* ---------- Status line ---------- */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+  margin-top: 16px;
+  max-width: 100%;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.status span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.status[data-state="on"] { color: var(--fg); }
+.status[data-state="on"] .dot { background: var(--on); box-shadow: 0 0 0 3px rgba(31, 201, 79, .2); }
+.status[data-state="error"] { color: var(--off); white-space: normal; }
+.status[data-state="error"] .dot { background: var(--off); }
+
+/* ---------- Protocol selector ---------- */
+.seg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  margin-top: 22px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--seg);
+}
+.seg button {
+  position: relative;
+  z-index: 1;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font: 600 13px var(--font);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s;
+}
+.seg button[aria-checked="true"] { color: var(--fg); }
+.kbd .seg button:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.seg button:focus { outline: none; }
+.seg-pill {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: 34px;
+  border-radius: 999px;
+  background: var(--field);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .14), 0 0 0 .5px rgba(0, 0, 0, .05);
+  transition: transform .28s cubic-bezier(.3, 1.2, .5, 1);
+}
+.seg[data-scheme="socks5"] .seg-pill { transform: translateX(100%); }
+
+/* ---------- Host / port ---------- */
+.fields {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 16px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field.host { flex: 1; }
+.field.port { width: 88px; }
+.field span { padding-left: 14px; font-size: 12px; color: var(--muted); }
+
+input {
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--fg);
+  font: 500 14px var(--font);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+input::placeholder { color: var(--muted); opacity: .55; }
+input:focus { border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent); }
+input[aria-invalid="true"] { border-color: var(--off); box-shadow: 0 0 0 3px rgba(245, 34, 45, .15); }
+.port input { text-align: center; padding: 0 8px; font-variant-numeric: tabular-nums; }
+
+/* Hidden until the saved state is rendered, then no animation for the first frames,
+   so opening the popup never shows a flip from the defaults. */
+html.boot body { visibility: hidden; }
+html.boot *, html.boot *::before, html.boot *::after,
+html.settle *, html.settle *::before, html.settle *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before { transition: none !important; animation: none !important; }
+}
