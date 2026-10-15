@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/popup.png" alt="Proxy Switch popup" width="260" />
+<img src="popup.png" alt="Proxy Switch popup" width="260" />
 
 # ⚡ Proxy Switch
 
@@ -29,11 +29,11 @@ Flip the switch. Route your traffic. Flip it back. No menus, no fuss.
 
 | Browser | Package |
 |---------|---------|
-| 🦁 Brave   | `proxy-switch-brave.zip` |
-| 🟡 Chrome  | `proxy-switch-chrome.zip` |
-| 🔵 Edge    | `proxy-switch-edge.zip` |
-| 🔴 Opera   | `proxy-switch-opera.zip` |
-| 🦊 Firefox | `proxy-switch-firefox-1.1.0.xpi` |
+|  Brave   | `proxy-switch-brave.zip` |
+|  Chrome  | `proxy-switch-chrome.zip` |
+|  Edge    | `proxy-switch-edge.zip` |
+|  Opera   | `proxy-switch-opera.zip` |
+|  Firefox | `proxy-switch-firefox-1.1.0.xpi` |
 
 ## 📥 Installation
 
@@ -68,44 +68,9 @@ Flip the switch. Route your traffic. Flip it back. No menus, no fuss.
 - [x] Per-protocol saved profiles
 - [ ] 🔐 **HTTPS proxy** support
 - [ ] 🔗 **Proxy URL / PAC script** (automatic proxy configuration URL)
-- [ ] 🔑 Proxy authentication (username & password)
-- [ ] 🧭 Bypass list (domains that skip the proxy)
-- [ ] 🎯 Per-site rules (auto-switch by domain)
-- [ ] 📚 Multiple named profiles / quick profile switcher
-- [ ] 🌗 Dark mode
-- [ ] 🌍 Multi-language UI (English, فارسی, ...)
-- [ ] ⌨️ Keyboard shortcut to toggle
-- [ ] 📤 Import / export settings
-- [ ] 🧪 Built-in connection test (ping & IP check)
-- [ ] 🛒 Publish to Chrome Web Store, Edge Add-ons, Firefox Add-ons
 
 Have an idea? [Open an issue](../../issues/new) 💡
 
-## 🗂️ Project Structure
-
-```
-proxy-switch/
-├── manifest.json
-├── src/
-│   ├── background.js
-│   ├── api.js
-│   ├── config.js
-│   └── popup/
-│       ├── popup.html
-│       ├── popup.css
-│       └── popup.js
-└── icons/
-```
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/amazing-feature`
-3. Commit: `git commit -m "Add amazing feature"`
-4. Push: `git push origin feature/amazing-feature`
-5. Open a Pull Request
 
 ## 📄 License
 
