@@ -1,0 +1,36 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies & build output
+node_modules/
+dist/
+build/
+web-ext-artifacts/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Temp
+*.tmp
+*.bak
+
+# Packaged builds (upload these to GitHub Releases instead)
+*.zip
+*.xpi
+*.crx
